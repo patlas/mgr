@@ -8,11 +8,13 @@
 #ifndef COMMPROTOCOL_H_
 #define COMMPROTOCOL_H_
 
-#include <cstdint>
+#include <stdint.h>
+#include "CRC.h"
+#include "HWInterface.h"
 
 namespace comm_proto {
 
-enum class DataType : std::uint8_t {UNKNOWN=0, COMMAND=1};
+enum class DataType : uint8_t {UNKNOWN=0, COMMAND=1};
 
 class CommProtocol{
 public:
@@ -33,7 +35,7 @@ public:
 		interface.rawFrame.value = new uint8_t[dataFieldSize];
 	}
 
-	bool sendData(const uint8_t * const, const uint32_t);
+	bool sendData(const uint8_t*, const uint32_t);
 	uint32_t receiveData(const uint32_t, uint8_t*, const uint16_t);
 
 private:
@@ -43,7 +45,7 @@ private:
 	bool getACK();
 	bool sendFrame();
 	bool receiveFrame();
-	void buildFrame(DataType,const uint8_t * const, const uint32_t);
+	void buildFrame(DataType, const uint8_t*, const uint32_t);
 	bool checkCRC(); // unnecessary?
 	bool retransmitFrame(); // unnecessary retransmit accomplished by sendData
 

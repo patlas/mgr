@@ -16,8 +16,9 @@ public:
 	uint8_t size;
 	uint32_t crc_val;
 	virtual ~CRC() {}
+	CRC(uint8_t s, uint32_t crc) : size(s), crc_val(crc){};
 
-	virtual uint32_t calculate(const void const *, uint32_t) = 0;
+	virtual uint32_t calculate(const uint8_t *, uint32_t) = 0;
 
 	virtual bool compare(CRC& crc){
 		if(crc_val == crc.crc_val) return true;

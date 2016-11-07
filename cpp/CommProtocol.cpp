@@ -30,9 +30,9 @@ bool CommProtocol::getACK()
 	return true;
 }
 
-void CommProtocol::buildFrame(DataType t, const uint8_t * const dat, const uint32_t count)
+void CommProtocol::buildFrame(DataType t, const uint8_t* dat, const uint32_t count)
 {
-	interface.rawFrame.type = t;
+	interface.rawFrame.type = 1;//TODO(uint8_t)t;
 	memcpy(interface.rawFrame.value, dat, count);
 	interface.rawFrame.crc = crc.calculate(dat, value_byte_count);
 }
@@ -95,7 +95,7 @@ bool CommProtocol::receiveFrame()
 }
 
 
-bool CommProtocol::sendData(const uint8_t * const dat, const uint32_t size)
+bool CommProtocol::sendData(const uint8_t *dat, const uint32_t size)
 {
 	uint8_t retry_count = 0;
 	uint32_t frameCount = size/value_byte_count; //without uncomplete rest if exist
