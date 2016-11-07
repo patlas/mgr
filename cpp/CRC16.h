@@ -17,7 +17,7 @@ public:
 	CRC16() : size(16), crc_val(0) {};
 	virtual ~CRC16() {};
 
-	uint32_t calculate(const void const *data, uint32_t len)
+	uint32_t calculate(const void * const data, uint32_t len)
 	{
 		crc_val = 0xAAAA; //TODO crc 16 calculation
 		return crc_val;
