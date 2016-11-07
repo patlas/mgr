@@ -27,6 +27,7 @@ public:
 
 	uint8_t recvByte()
 	{
+		//if timeout than return 0??
 		return 0x00;
 	}
 

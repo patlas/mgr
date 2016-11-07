@@ -19,6 +19,7 @@ public:
 	CRC& crc;
 	HWInterface& interface;
 	uint8_t value_byte_count;
+	uint16_t timeout_ms;
 
 	static const uint8_t trans_retry = 3;
 
@@ -27,7 +28,7 @@ public:
 		delete[] interface.rawFrame.value;
 	}
 
-	CommProtocol(CRC& crc, HWInterface& interface, uint8_t dataFieldSize) : crc(crc), interface(interface), value_byte_count(dataFieldSize)
+	CommProtocol(CRC& crc, HWInterface& interface, uint8_t dataFieldSize, uint16_t timeout_ms) : crc(crc), interface(interface), value_byte_count(dataFieldSize), timeout_ms(timeout_ms)
 	{
 		interface.rawFrame.value = new uint8_t[dataFieldSize];
 	}
