@@ -27,3 +27,15 @@
 *.exe
 *.out
 *.app
+
+#Keil
+*.crf
+*.d
+*.o
+*.axf
+*.dep
+*.htm
+*.iex
+*.lnp
+*.map
+*.sct
