@@ -92,10 +92,10 @@ int main(void)
 	////HAL_HRTIM_WaveformSetOutputLevel(&hhrtim1, HRTIM_TIMERINDEX_TIMER_A, HRTIM_OUTPUT_TA1, HRTIM_OUTPUTLEVEL_ACTIVE);
 	HAL_HRTIM_WaveformOutputStart(&hhrtim1, HRTIM_OUTPUT_TA1 | HRTIM_OUTPUT_TA2 | HRTIM_OUTPUT_TB1);
 	//HAL_HRTIM_WaveformCounterStart_IT(&hhrtim1, HRTIM_TIMERID_TIMER_A);
-	HAL_HRTIM_WaveformCounterStart(&hhrtim1, HRTIM_TIMERID_TIMER_A | HRTIM_TIMERID_TIMER_B);
+	HAL_HRTIM_WaveformCounterStart(&hhrtim1, HRTIM_TIMERID_TIMER_A /*| HRTIM_TIMERID_TIMER_B*/);
 	
-	//void advanced_int_init();
-	//void update_phase(int val);
+	advanced_int_init();
+	update_phase(20000);
 	
 	//enable repetition interrupt
 	//__HAL_HRTIM_TIMER_ENABLE_IT(&hhrtim1, HRTIM_TIMERINDEX_TIMER_A, HRTIM_TIM_IT_REP);
@@ -112,10 +112,15 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+	uint16_t v = 20000; //max 65500
+	uint8_t x = 0;
   while (1)
   {
   /* USER CODE END WHILE */
-
+		if(x)
+			update_phase(v);
+		HAL_Delay(500);
+		x = 0;
   /* USER CODE BEGIN 3 */
 
   }

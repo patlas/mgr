@@ -69,9 +69,9 @@ void MX_HRTIM1_Init(void)
     Error_Handler();
   }
 
-  pTimeBaseCfg.Period = 1000;//0x2a8;
+  pTimeBaseCfg.Period = 0xFFDF;//0x2a8;
   pTimeBaseCfg.RepetitionCounter = 0x00;
-  pTimeBaseCfg.PrescalerRatio = HRTIM_PRESCALERRATIO_MUL32;
+  pTimeBaseCfg.PrescalerRatio = HRTIM_PRESCALERRATIO_MUL8;//HRTIM_PRESCALERRATIO_MUL32;
   pTimeBaseCfg.Mode = HRTIM_MODE_CONTINUOUS;
   if (HAL_HRTIM_TimeBaseConfig(&hhrtim1, HRTIM_TIMERINDEX_TIMER_A, &pTimeBaseCfg) != HAL_OK)
   {
@@ -122,13 +122,13 @@ void MX_HRTIM1_Init(void)
     Error_Handler();
   }
 
-  pCompareCfg.CompareValue = 500;//0x154;
+  pCompareCfg.CompareValue = 0x7fef;//0x154;
   if (HAL_HRTIM_WaveformCompareConfig(&hhrtim1, HRTIM_TIMERINDEX_TIMER_A, HRTIM_COMPAREUNIT_1, &pCompareCfg) != HAL_OK)
   {
     Error_Handler();
   }
 	
-	pCompareCfg.CompareValue = 500;//0x154;
+	pCompareCfg.CompareValue = 0x7fef;//0x154;
   if (HAL_HRTIM_WaveformCompareConfig(&hhrtim1, HRTIM_TIMERINDEX_TIMER_B, HRTIM_COMPAREUNIT_1, &pCompareCfg) != HAL_OK)
   {
     Error_Handler();
@@ -194,7 +194,7 @@ void MX_HRTIM1_Init(void)
     Error_Handler();
   }
 
-  pTimeBaseCfg.Period = 1000;
+  pTimeBaseCfg.Period = 0xFFDF;
   if (HAL_HRTIM_TimeBaseConfig(&hhrtim1, HRTIM_TIMERINDEX_TIMER_C, &pTimeBaseCfg) != HAL_OK)
   {
     Error_Handler();
