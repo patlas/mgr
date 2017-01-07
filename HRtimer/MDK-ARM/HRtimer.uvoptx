@@ -145,24 +145,7 @@
           <Name>-U0670FF485649785087035017 -O2254 -S0 -C0 -A0 -N00("ARM CoreSight SW-DP") -D00(2BA01477) -L00(0) -TO18 -TC144000000 -TP21 -TDS8047 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -FO15 -FD20000000 -FC800 -FN1 -FF0STM32F3xx_256.FLM -FS08000000 -FL08000 -FP0($$Device:STM32F334C6$Flash\STM32F3xx_256.FLM)</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint>
-        <Bp>
-          <Number>0</Number>
-          <Type>0</Type>
-          <LineNumber>124</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>../Src/main.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression></Expression>
-        </Bp>
-      </Breakpoint>
+      <Breakpoint/>
       <WatchWindow1>
         <Ww>
           <count>0</count>
@@ -226,6 +209,10 @@
         <Entry>
           <Name>System Viewer\HRTIM_TIMA</Name>
           <WinId>35903</WinId>
+        </Entry>
+        <Entry>
+          <Name>System Viewer\HRTIM_TIMB</Name>
+          <WinId>35901</WinId>
         </Entry>
       </SystemViewers>
     </TargetOption>
@@ -654,6 +641,18 @@
       <bDave2>0</bDave2>
       <PathWithFileName>../Src/dac.c</PathWithFileName>
       <FilenameWithoutPath>dac.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>34</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\Src\utils.c</PathWithFileName>
+      <FilenameWithoutPath>utils.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

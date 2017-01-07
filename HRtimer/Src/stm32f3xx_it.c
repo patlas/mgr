@@ -202,15 +202,34 @@ void COMP2_IRQHandler(void)
 /**
 * @brief This function handles HRTIM timer A global interrupt.
 */
+
+#if 0
 void HRTIM1_TIMA_IRQHandler(void)
 {
-  /* USER CODE BEGIN HRTIM1_TIMA_IRQn 0 */
+	#if 0
+	//Code below enables callback system
+  //HAL_HRTIM_IRQHandler(&hhrtim1,HRTIM_TIMERINDEX_TIMER_A);
+	//HRTIM1->sTimerxRegs[0];
+	
+	  //if(__HAL_HRTIM_TIMER_GET_FLAG(&hhrtim1, HRTIM_TIMERINDEX_TIMER_A, HRTIM_TIM_FLAG_REP) != RESET)
+		//{
+    if(__HAL_HRTIM_TIMER_GET_ITSTATUS(&hhrtim1, HRTIM_TIMERINDEX_TIMER_A, HRTIM_TIM_IT_REP) != RESET)
+    {
+			//HRTIM1->sTimerxRegs[(HRTIM_TIMERINDEX_TIMER_A)].TIMxICR = (HRTIM_TIM_IT_REP);
+			__HAL_HRTIM_TIMER_CLEAR_IT(&hhrtim1, HRTIM_TIMERINDEX_TIMER_A, HRTIM_TIM_IT_REP);
+			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_11);
+      //__HAL_HRTIM_TIMER_CLEAR_IT(&hhrtim1, HRTIM_TIMERINDEX_TIMER_A, HRTIM_TIM_IT_REP);
+      	//
+				//GPIOB->ODR ^= GPIO_PIN_11;
+      /* Invoke repetition event callback */
+      //HAL_HRTIM_RepetitionEventCallback(hhrtim, TimerIdx);  
+    }
+  //}
+		#endif
+		
+		
+		
 
-  /* USER CODE END HRTIM1_TIMA_IRQn 0 */
-  HAL_HRTIM_IRQHandler(&hhrtim1,HRTIM_TIMERINDEX_TIMER_A);
-  /* USER CODE BEGIN HRTIM1_TIMA_IRQn 1 */
-
-  /* USER CODE END HRTIM1_TIMA_IRQn 1 */
 }
 
 /**
@@ -226,7 +245,7 @@ void HRTIM1_TIMC_IRQHandler(void)
 
   /* USER CODE END HRTIM1_TIMC_IRQn 1 */
 }
-
+#endif
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */

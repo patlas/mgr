@@ -559,6 +559,11 @@
               <FileType>1</FileType>
               <FilePath>../Src/dac.c</FilePath>
             </File>
+            <File>
+              <FileName>utils.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\utils.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

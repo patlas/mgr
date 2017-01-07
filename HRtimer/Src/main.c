@@ -40,6 +40,7 @@
 #include "usart.h"
 #include "gpio.h"
 
+#include "utils.h"
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
@@ -89,11 +90,15 @@ int main(void)
 
 	
 	////HAL_HRTIM_WaveformSetOutputLevel(&hhrtim1, HRTIM_TIMERINDEX_TIMER_A, HRTIM_OUTPUT_TA1, HRTIM_OUTPUTLEVEL_ACTIVE);
-	HAL_HRTIM_WaveformOutputStart(&hhrtim1, HRTIM_OUTPUT_TA1 | HRTIM_OUTPUT_TA2);
-	HAL_HRTIM_WaveformCounterStart_IT(&hhrtim1, HRTIM_TIMERID_TIMER_A);
+	HAL_HRTIM_WaveformOutputStart(&hhrtim1, HRTIM_OUTPUT_TA1 | HRTIM_OUTPUT_TA2 | HRTIM_OUTPUT_TB1);
+	//HAL_HRTIM_WaveformCounterStart_IT(&hhrtim1, HRTIM_TIMERID_TIMER_A);
+	HAL_HRTIM_WaveformCounterStart(&hhrtim1, HRTIM_TIMERID_TIMER_A | HRTIM_TIMERID_TIMER_B);
+	
+	//void advanced_int_init();
+	//void update_phase(int val);
 	
 	//enable repetition interrupt
-	__HAL_HRTIM_TIMER_ENABLE_IT(&hhrtim1, HRTIM_TIMERINDEX_TIMER_A, HRTIM_TIM_IT_REP);
+	//__HAL_HRTIM_TIMER_ENABLE_IT(&hhrtim1, HRTIM_TIMERINDEX_TIMER_A, HRTIM_TIM_IT_REP);
 	
 	//HAL_HRTIM_SimpleBaseStart(&hhrtim1,HRTIM_TIMERINDEX_TIMER_A);
 	////HAL_HRTIM_SimpleBaseStart_IT(&hhrtim1,HRTIM_TIMERINDEX_TIMER_A);
