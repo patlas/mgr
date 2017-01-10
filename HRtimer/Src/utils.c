@@ -3,22 +3,29 @@
 void advanced_int_init() {
 	
 	//disable TIMA rep int
-	HRTIM1->sTimerxRegs[HRTIM_TIMERINDEX_TIMER_A].TIMxDIER &= ~(HRTIM_TIM_IT_REP);
+	//HRTIM1->sTimerxRegs[HRTIM_TIMERINDEX_TIMER_A].TIMxDIER &= ~(HRTIM_TIM_IT_REP);
 	
 	//stop TIMC
-	HRTIM1->sMasterRegs.MCR &= ~(HRTIM_TIMERID_TIMER_C);
+	//HRTIM1->sMasterRegs.MCR &= ~(HRTIM_TIMERID_TIMER_C);
 	
 	//enable TIMC comp1 int
-	HRTIM1->sTimerxRegs[HRTIM_TIMERINDEX_TIMER_C].TIMxDIER |= (HRTIM_TIM_IT_CMP1);
+	//HRTIM1->sTimerxRegs[HRTIM_TIMERINDEX_TIMER_C].TIMxDIER |= (HRTIM_TIM_IT_CMP1);
 	
 }
 
-
+#define PERIOD 0xFFDE
 void update_phase(uint16_t val) {
 	//UPDATE TIMC CMP1 register
-	HRTIM1->sTimerxRegs[HRTIM_TIMERINDEX_TIMER_C].CMP1xR = val;
+	//HRTIM1->sTimerxRegs[HRTIM_TIMERINDEX_TIMER_C].CMP1xR = val;
 	//ENABLE TIMA_PRELOAD_IT
-	HRTIM1->sTimerxRegs[HRTIM_TIMERINDEX_TIMER_A].TIMxDIER |= (HRTIM_TIM_IT_REP);
+	//HRTIM1->sTimerxRegs[HRTIM_TIMERINDEX_TIMER_A].TIMxDIER |= (HRTIM_TIM_IT_REP);
+	
+	//COMP1=PHASE, COMP2=PERIOD/2, COMP3=PERIOD/2 + PHASE, COMP4=PERIOD
+	HRTIM1->sTimerxRegs[HRTIM_TIMERINDEX_TIMER_B].CMP1xR = val;
+	HRTIM1->sTimerxRegs[HRTIM_TIMERINDEX_TIMER_B].CMP2xR = PERIOD/2;
+	HRTIM1->sTimerxRegs[HRTIM_TIMERINDEX_TIMER_B].CMP3xR = val + PERIOD/2;
+	HRTIM1->sTimerxRegs[HRTIM_TIMERINDEX_TIMER_B].CMP4xR = PERIOD;
+	
 }
 
 //all configuration for this interrupt made in init stage
@@ -31,7 +38,7 @@ void HRTIM1_TIMA_IRQHandler(void) {
 		
 		//stop TIMB - allow to shift phase //MEASUE BKP START
 		HRTIM1->sMasterRegs.MCR &= ~(HRTIM_TIMERID_TIMER_B);
-		
+		//zmienic kolejnoscia (speed up) ^ v
 		//START TIMC
 		HRTIM1->sMasterRegs.MCR |= HRTIM_TIMERID_TIMER_C;
 		

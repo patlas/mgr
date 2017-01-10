@@ -129,16 +129,11 @@ void MX_HRTIM1_Init(void)
   }
 	
 	pCompareCfg.CompareValue = 0x7fef;//0x154;
-  if (HAL_HRTIM_WaveformCompareConfig(&hhrtim1, HRTIM_TIMERINDEX_TIMER_B, HRTIM_COMPAREUNIT_1, &pCompareCfg) != HAL_OK)
+  if (HAL_HRTIM_WaveformCompareConfig(&hhrtim1, HRTIM_TIMERINDEX_TIMER_B, HRTIM_COMPAREUNIT_1 | HRTIM_COMPAREUNIT_2 | HRTIM_COMPAREUNIT_3 | HRTIM_COMPAREUNIT_4, &pCompareCfg) != HAL_OK)
   {
     Error_Handler();
   }
-	/*
-	pCompareCfg.CompareValue = 0x2A6;
-  if (HAL_HRTIM_WaveformCompareConfig(&hhrtim1, HRTIM_TIMERINDEX_TIMER_A, HRTIM_COMPAREUNIT_2, &pCompareCfg) != HAL_OK)
-  {
-    Error_Handler();
-  }*/
+
 
   pOutputCfg.Polarity = HRTIM_OUTPUTPOLARITY_HIGH;
   pOutputCfg.SetSource = HRTIM_OUTPUTSET_TIMPER; //HRTIM_OUTPUTSET_NONE;
@@ -148,12 +143,8 @@ void MX_HRTIM1_Init(void)
   pOutputCfg.FaultLevel = HRTIM_OUTPUTFAULTLEVEL_NONE;
   pOutputCfg.ChopperModeEnable = HRTIM_OUTPUTCHOPPERMODE_DISABLED;
   pOutputCfg.BurstModeEntryDelayed = HRTIM_OUTPUTBURSTMODEENTRY_REGULAR;
+	
   if (HAL_HRTIM_WaveformOutputConfig(&hhrtim1, HRTIM_TIMERINDEX_TIMER_A, HRTIM_OUTPUT_TA1, &pOutputCfg) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  if (HAL_HRTIM_WaveformOutputConfig(&hhrtim1, HRTIM_TIMERINDEX_TIMER_B, HRTIM_OUTPUT_TB1, &pOutputCfg) != HAL_OK)
   {
     Error_Handler();
   }
@@ -164,6 +155,16 @@ void MX_HRTIM1_Init(void)
     Error_Handler();
   }
 
+	pOutputCfg.Polarity = HRTIM_OUTPUTPOLARITY_HIGH;
+	pOutputCfg.SetSource = HRTIM_OUTPUTSET_TIMCMP1; //HRTIM_OUTPUTSET_NONE;
+  pOutputCfg.ResetSource = HRTIM_OUTPUTRESET_TIMCMP2; //HRTIM_OUTPUTRESET_NONE;
+	if (HAL_HRTIM_WaveformOutputConfig(&hhrtim1, HRTIM_TIMERINDEX_TIMER_B, HRTIM_OUTPUT_TB1, &pOutputCfg) != HAL_OK)
+  {
+    Error_Handler();
+  }
+	
+	pOutputCfg.SetSource = HRTIM_OUTPUTSET_TIMCMP3; //HRTIM_OUTPUTSET_NONE;
+  pOutputCfg.ResetSource = HRTIM_OUTPUTRESET_TIMCMP4; //HRTIM_OUTPUTRESET_NONE;
   if (HAL_HRTIM_WaveformOutputConfig(&hhrtim1, HRTIM_TIMERINDEX_TIMER_B, HRTIM_OUTPUT_TB2, &pOutputCfg) != HAL_OK)
   {
     Error_Handler();
@@ -226,10 +227,10 @@ void HAL_HRTIM_MspInit(HRTIM_HandleTypeDef* hrtimHandle)
     __HAL_RCC_HRTIM1_CLK_ENABLE();
 
     /* Peripheral interrupt init */
-    HAL_NVIC_SetPriority(HRTIM1_TIMA_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(HRTIM1_TIMA_IRQn);
-    HAL_NVIC_SetPriority(HRTIM1_TIMC_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(HRTIM1_TIMC_IRQn);
+//    HAL_NVIC_SetPriority(HRTIM1_TIMA_IRQn, 0, 0);
+//    HAL_NVIC_EnableIRQ(HRTIM1_TIMA_IRQn);
+//    HAL_NVIC_SetPriority(HRTIM1_TIMC_IRQn, 0, 0);
+//    HAL_NVIC_EnableIRQ(HRTIM1_TIMC_IRQn);
   /* USER CODE BEGIN HRTIM1_MspInit 1 */
 
   /* USER CODE END HRTIM1_MspInit 1 */
